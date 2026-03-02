@@ -1,8 +1,43 @@
-import { JSX } from "react";
+import { ChangeEvent, Dispatch, JSX, SetStateAction, useState } from "react";
 import styles from "./App.module.css";
 import poweredImage from "./assets/powered.png";
 
 const App = (): JSX.Element => {
+    const [height, setHeight]: [
+        number, 
+        Dispatch<SetStateAction<number>>
+    ] = useState<number>(0);
+    
+    const [weight, setWeight]: [
+        number, 
+        Dispatch<SetStateAction<number>>
+    ] = useState<number>(0);
+
+    const [imc, setImc]: [
+        number, 
+        Dispatch<SetStateAction<number>>
+    ] = useState<number>(0);
+
+    const handleHeightChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        const value: number = Number(e.target.value);
+        setHeight(value);
+    };
+
+    const handleWeightChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        const value: number = Number(e.target.value);
+        setWeight(value);
+    }
+
+    const handleCalculateImc = (): void => {
+        if (!height || !weight) {
+            alert("Por favor, preencha ambos os campos de altura e peso para calcular o IMC.");
+            return;
+        }
+
+        const imcValue: number = weight / (height * height);
+        setImc(imcValue);
+    };
+
     return (
         <div className={styles.main}>
             <header>
@@ -12,7 +47,24 @@ const App = (): JSX.Element => {
             </header>
             <div className={styles.container}>
                 <div className={styles.leftSide}>
-                    ...
+                    <h1>Calcule seu IMC.</h1>
+                    <p>IMC é a sigla para Índice de Massa Corporal, parâmetro adotado pela OMS (Organização Mundial da Saúde) para calcular o peso ideal de cada pessoa.</p>
+
+                    <input 
+                        type="number"
+                        placeholder="Digite sua altura. Ex: 1.5 (em metros)"
+                        value={height > 0 ? height : ""}
+                        onChange={handleHeightChange}
+                    />
+
+                    <input 
+                        type="number"
+                        placeholder="Digite seu peso. Ex: 70 (em kg)"
+                        value={weight > 0 ? weight : ""}
+                        onChange={handleWeightChange}
+                    />
+
+                    <button onClick={handleCalculateImc}>Calcular IMC</button>
                 </div>
                 <div className={styles.rightSide}>
                     ...
