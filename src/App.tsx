@@ -2,6 +2,8 @@ import { ChangeEvent, Dispatch, JSX, SetStateAction, useState } from "react";
 import styles from "./App.module.css";
 import poweredImage from "./assets/powered.png";
 import { calculateImc, levels } from "./helpers/imc.helper";
+import { Input } from "./components/input.component";
+import { Button } from "./components/button.component";
 
 const App = (): JSX.Element => {
     const [height, setHeight]: [
@@ -51,21 +53,19 @@ const App = (): JSX.Element => {
                     <h1>Calcule seu IMC.</h1>
                     <p>IMC é a sigla para Índice de Massa Corporal, parâmetro adotado pela OMS (Organização Mundial da Saúde) para calcular o peso ideal de cada pessoa.</p>
 
-                    <input 
-                        type="number"
-                        placeholder="Digite sua altura. Ex: 1.5 (em metros)"
-                        value={height > 0 ? height : ""}
-                        onChange={handleHeightChange}
+                    <Input 
+                        text = "Digite sua altura. Ex: 1.5 (em metros)"
+                        value={height}
+                        changeEvent={handleHeightChange}
                     />
 
-                    <input 
-                        type="number"
-                        placeholder="Digite seu peso. Ex: 70 (em kg)"
-                        value={weight > 0 ? weight : ""}
-                        onChange={handleWeightChange}
+                    <Input 
+                        text = "Digite seu peso. Ex: 70 (em kg)"
+                        value={weight}
+                        changeEvent={handleWeightChange}
                     />
 
-                    <button onClick={handleCalculateImc}>Calcular IMC</button>
+                    <Button onClick={handleCalculateImc} text="Calcular IMC" />
                 </div>
                 <div className={styles.rightSide}>
                     ...
