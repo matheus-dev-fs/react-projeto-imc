@@ -1,6 +1,7 @@
 import { ChangeEvent, Dispatch, JSX, SetStateAction, useState } from "react";
 import styles from "./App.module.css";
 import poweredImage from "./assets/powered.png";
+import { calculateImc, levels } from "./helpers/imc.helper";
 
 const App = (): JSX.Element => {
     const [height, setHeight]: [
@@ -34,7 +35,7 @@ const App = (): JSX.Element => {
             return;
         }
 
-        const imcValue: number = weight / (height * height);
+        const imcValue: number = calculateImc(height, weight)!.yourImc as number;
         setImc(imcValue);
     };
 
