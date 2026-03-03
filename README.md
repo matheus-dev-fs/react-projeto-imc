@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# React Projeto IMC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto simples em **React + TypeScript** para calcular o **IMC (Índice de Massa Corporal)** e exibir a classificação (Magreza, Normal, Sobrepeso, Obesidade).
 
-## Available Scripts
+Desenvolvido durante o curso de **React** da **B7Web**.
 
-In the project directory, you can run:
+## Funcionalidades
 
-### `npm start`
+- Input de **altura (m)** e **peso (kg)**
+- Cálculo do IMC
+- Exibição do resultado em um card com:
+  - faixa do IMC
+  - valor calculado (“Seu IMC”)
+  - categoria com cor/ícone
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tecnologias
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React (Create React App)
+- TypeScript
+- CSS Modules
 
-### `npm test`
+## Estrutura do projeto (resumo)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `src/App.tsx` – página principal e controle de estado (altura, peso, resultado)
+- `src/helpers/imc.helper.ts` – regras de negócio:
+  - `levels` (faixas/categorias)
+  - `calculateImc(height, weight)`
+- `src/interfaces/level.interface.ts` – tipagem do objeto `Level`
+- `src/components`
+  - `input.component.tsx`
+  - `button.component.tsx`
+  - `grid-item/grid-item.component.tsx` (card de cada categoria)
+- `src/assets` – ícones/imagens usados na UI
 
-### `npm run build`
+## Como rodar
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Acesse: `http://localhost:3000`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Como usar
 
-### `npm run eject`
+1. Digite sua **altura** (ex.: `1.75`)
+2. Digite seu **peso** (ex.: `70`)
+3. Clique em **Calcular IMC**
+4. Para voltar e calcular novamente, clique na seta de voltar no resultado.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Créditos
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Projeto feito no curso de React da [B7Web](https://b7web.com.br/).  
