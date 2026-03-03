@@ -4,6 +4,8 @@ import poweredImage from "./assets/powered.png";
 import { calculateImc, levels } from "./helpers/imc.helper";
 import { Input } from "./components/input.component";
 import { Button } from "./components/button.component";
+import { Level } from "./interfaces/level.interface";
+import { GridItem } from "./components/grid-item/grid-item.component";
 
 const App = (): JSX.Element => {
     const [height, setHeight]: [
@@ -68,7 +70,11 @@ const App = (): JSX.Element => {
                     <Button onClick={handleCalculateImc} text="Calcular IMC" />
                 </div>
                 <div className={styles.rightSide}>
-                    ...
+                    <div className={styles.grid}>
+                        {levels.map((level: Level, index: number): JSX.Element => (
+                            <GridItem key={index} level={level} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
