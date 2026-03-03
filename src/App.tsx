@@ -6,22 +6,23 @@ import { Input } from "./components/input.component";
 import { Button } from "./components/button.component";
 import { Level } from "./interfaces/level.interface";
 import { GridItem } from "./components/grid-item/grid-item.component";
+import leftArrowImage from "./assets/leftarrow.png";
 
 const App = (): JSX.Element => {
     const [height, setHeight]: [
-        number, 
-        Dispatch<SetStateAction<number>>
-    ] = useState<number>(0);
-    
-    const [weight, setWeight]: [
-        number, 
+        number,
         Dispatch<SetStateAction<number>>
     ] = useState<number>(0);
 
-    const [imc, setImc]: [
-        number, 
+    const [weight, setWeight]: [
+        number,
         Dispatch<SetStateAction<number>>
     ] = useState<number>(0);
+
+    const [showLevel, setShowLevel]: [
+        Level | null,
+        Dispatch<SetStateAction<Level | null>>
+    ] = useState<Level | null>(null);
 
     const handleHeightChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const value: number = Number(e.target.value);
@@ -39,8 +40,14 @@ const App = (): JSX.Element => {
             return;
         }
 
-        const imcValue: number = calculateImc(height, weight)!.yourImc as number;
-        setImc(imcValue);
+        const level: Level | null = calculateImc(height, weight);
+        setShowLevel(level);
+    };
+
+    const handleBackButton = (): void => {
+        setShowLevel(null);
+        setHeight(0);
+        setWeight(0);
     };
 
     return (
@@ -55,14 +62,14 @@ const App = (): JSX.Element => {
                     <h1>Calcule seu IMC.</h1>
                     <p>IMC é a sigla para Índice de Massa Corporal, parâmetro adotado pela OMS (Organização Mundial da Saúde) para calcular o peso ideal de cada pessoa.</p>
 
-                    <Input 
-                        text = "Digite sua altura. Ex: 1.5 (em metros)"
+                    <Input
+                        text="Digite sua altura. Ex: 1.5 (em metros)"
                         value={height}
                         changeEvent={handleHeightChange}
                     />
 
-                    <Input 
-                        text = "Digite seu peso. Ex: 70 (em kg)"
+                    <Input
+                        text="Digite seu peso. Ex: 70 (em kg)"
                         value={weight}
                         changeEvent={handleWeightChange}
                     />
@@ -70,11 +77,21 @@ const App = (): JSX.Element => {
                     <Button onClick={handleCalculateImc} text="Calcular IMC" />
                 </div>
                 <div className={styles.rightSide}>
-                    <div className={styles.grid}>
-                        {levels.map((level: Level, index: number): JSX.Element => (
-                            <GridItem key={index} level={level} />
-                        ))}
-                    </div>
+                    {!showLevel &&
+                        <div className={styles.grid}>
+                            {levels.map((level: Level, index: number): JSX.Element => (
+                                <GridItem key={index} level={level} />
+                            ))}
+                        </div>
+                    }
+                    {showLevel &&
+                        <div className={styles.rightBig}>
+                            <div className={styles.rightArrow} onClick={handleBackButton}>
+                                <img src={leftArrowImage} alt="Left Arrow" width={25} />
+                            </div>
+                            <GridItem level={showLevel} />
+                        </div>
+                    }
                 </div>
             </div>
         </div>

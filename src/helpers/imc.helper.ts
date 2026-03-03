@@ -8,7 +8,7 @@ export const levels: Level[] = [
 ];
 
 export const calculateImc = (height: number, weight: number): Level | null => {
-    const imcValue: number = weight / (height * height);
+    const imcValue: number = Number((weight / (height * height)).toFixed(2));
     
     for (const level of levels) {
         const min: number = level.imc[0];
@@ -16,9 +16,11 @@ export const calculateImc = (height: number, weight: number): Level | null => {
 
         if (imcValue < min || imcValue > max) 
             continue;
-
-        level.yourImc = imcValue;
-        return level;
+        
+        const levelCopy: Level = { ...level };
+        
+        levelCopy.yourImc = imcValue;
+        return levelCopy;
     }
 
     return null;

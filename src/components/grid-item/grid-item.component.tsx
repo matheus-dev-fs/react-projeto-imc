@@ -16,6 +16,11 @@ export const GridItem = ({ level }: Props): JSX.Element => {
                 {level.icon === "down" && <img src={downImage} alt="Down Icon" width={30} />}
             </div>
             <div className={styles.gridTitle}>{level.title}</div>
+
+            {level.yourImc && 
+                <div className={styles.yourImc}>Seu IMC: {level.yourImc}</div>
+            }
+
             <div className={styles.gridInfo}>
                 <>
                     IMC está entre <strong>{level.imc[0]}</strong> e <strong>{level.imc[1]}</strong>
