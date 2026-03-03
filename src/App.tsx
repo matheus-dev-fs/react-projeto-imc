@@ -66,15 +66,17 @@ const App = (): JSX.Element => {
                         text="Digite sua altura. Ex: 1.5 (em metros)"
                         value={height}
                         changeEvent={handleHeightChange}
+                        disabled={showLevel !== null}
                     />
 
                     <Input
                         text="Digite seu peso. Ex: 70 (em kg)"
                         value={weight}
                         changeEvent={handleWeightChange}
+                        disabled={showLevel !== null}
                     />
 
-                    <Button onClick={handleCalculateImc} text="Calcular IMC" />
+                    <Button onClick={handleCalculateImc} text="Calcular IMC" disable={showLevel !== null} />
                 </div>
                 <div className={styles.rightSide}>
                     {!showLevel &&
